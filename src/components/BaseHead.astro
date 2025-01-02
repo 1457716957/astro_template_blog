@@ -15,31 +15,37 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
 
 <!-- Global Metadata -->
+ <!-- 
+charset="utf-8"：指定字符编码为 UTF-8。
+viewport：确保页面在移动设备上正确缩放。
+favicon：设置页面的图标。
+generator：标识生成页面的工具（这里是 Astro）
+ -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
+<!-- Font preloads 这些标签预加载了两种字体文件，以加快页面加载速度-->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
 <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
 
-<!-- Canonical URL -->
+<!-- Canonical URL => 设置当前页面的规范 URL，有助于 SEO-->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Primary Meta Tags -->
+<!-- Primary Meta Tags => 主要 Meta 标签  这些标签设置了页面的标题和描述，用于搜索引擎和浏览器标签-->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
+<!-- Open Graph / Facebook => 这些标签用于在 Facebook 等社交媒体上分享页面时显示的元数据-->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 
-<!-- Twitter -->
+<!-- Twitter => 这些标签用于在 Twitter 上分享页面时显示的元数据-->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
