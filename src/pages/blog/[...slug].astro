@@ -3,19 +3,33 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
 
+/**
+ * 生成静态路径的函数
+ * @returns {Promise<{ params: { slug: string }, props: CollectionEntry<'blog'> }[]>} 包含每个博客文章的slug和props的对象数组
+ */
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+    // 获取所有博客文章
+    const posts = await getCollection('blog');
+    // 返回每个博客文章的slug和props
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: post,
+    }));
 }
+
+/**
+ * 博客文章的属性类型
+ */
 type Props = CollectionEntry<'blog'>;
 
+// 获取当前博客文章的属性
 const post = Astro.props;
+// 渲染博客文章的内容
 const { Content } = await render(post);
 ---
 
+<!-- 使用BlogPost布局渲染博客文章 -->
 <BlogPost {...post.data}>
-	<Content />
+    <!-- 渲染博客文章的内容 -->
+    <Content />
 </BlogPost>
